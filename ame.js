@@ -78,7 +78,7 @@ window.addEventListener('load', function () {
 	const background 	= document.getElementById("background");
 
 	// call main
-	setInterval(main, 1500)
+	setInterval(main, 100)
 })
 
 
@@ -129,6 +129,12 @@ function AmeClicked(){
 	audio_click.play();
 
 	if((Math.random() * affectionChance) < 1) affection = 1;
+	if((currentEvent == AmeEvent.STRESS) && (stress > 0)){
+		if((Math.random() * affectionChance) < 1){
+			stress = stress - 1;
+			currentSpriteset = ame_stress_spritesets[stress];
+		}
+	}
 
 	ame.setAttribute("src", currentSpritesetPath + currentSpriteset[affection + 1]);
 	petTimestamp = Date.now();
