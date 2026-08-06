@@ -1,0 +1,44 @@
+:root{
+	--windowScale: 0.25;
+	--pixMult: calc(var(--windowScale) * 0.5vw + var(--windowScale) * 0.5vh)
+}
+
+body{
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0px;
+}
+
+img.sharp {
+
+
+	/*nearest neighbor upscale to keep the crisp pixel art*/
+	-ms-interpolation-mode: nearest-neighbor;
+	/* Firefox */
+	image-rendering: crisp-edges;
+	/* Chromium + Safari */
+	image-rendering: pixelated;
+}
+
+div.window {
+
+	/*nearest neighbor upscale to keep the crisp pixel art*/
+	-ms-interpolation-mode: nearest-neighbor;
+	/* Firefox */
+	image-rendering: crisp-edges;
+	/* Chromium + Safari */
+	image-rendering: pixelated;
+
+
+	/*fill screen*/
+	width: 100vw;
+	height: 100vh;
+
+	background-color: cyan;
+
+}
+
+div.windowSlice {
+	display: flex;
+}
