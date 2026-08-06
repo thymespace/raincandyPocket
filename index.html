@@ -9,8 +9,13 @@
 <head>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<title>Page Title</title>
+
+	<title>raincandy Pocket</title>
+	<link rel="icon" type="image/x-icon" href="assets/ame/Ame256.png">
+
 	<link rel='stylesheet' href='main.css'>
+	<script src="ame.js"></script>
+
 </head>
 
 
@@ -27,15 +32,19 @@
 
 		<div class="windowSlice">
 			<img class="sharp" src="assets/ui/window/3.png" style="height: calc(100vh - 60 * var(--pixMult)); width: calc(8 * var(--pixMult));">
-			<div style="height: calc(100vh - 60 * var(--pixMult)); width: calc(100vw - 16 * var(--pixMult));">
-				<img class="sharp" id="background" src="assets/backgrounds/Bg_stream_1.png">
+
+
+			<div style="height: calc(100vh - 60 * var(--pixMult)); width: calc(100vw - 16 * var(--pixMult)); overflow: hidden;">
+				<img class="sharp" id="background" src="assets/backgrounds/Bg_stream_1.png" style="height: 100%; width: 100%; object-fit: cover; z-index: -1; position: absolute;">
+				<img class="sharp" id="ame" src="assets/ame/idle/Ame_idle_S0-A0-D0.gif" style="height: 100%; width: 100%; object-fit: cover; z-index: -2;">
 			</div>
+
 			<img class="sharp" src="assets/ui/window/3.png" style="height: calc(100vh - 60 * var(--pixMult)); width: calc(8 * var(--pixMult));">
 		</div>
 
 		<div class="windowSlice">
 			<img class="sharp" src="assets/ui/window/4.png" style="height: calc(18 * var(--pixMult)); width: calc(67 * var(--pixMult));">
-			<img class="sharp" src="assets/ui/window/5.png" style="height: calc(18 * var(--pixMult)); width: calc(100vw - 75 * var(--pixMult));">
+			<img class="sharp" src="assets/ui/window/5.png" style="height: calc(18 * var(--pixMult)); width: calc(100vw - 75 *var(--pixMult));">
 			<img class="sharp" src="assets/ui/window/6.png" style="height: calc(18 * var(--pixMult)); width: calc(8 * var(--pixMult));">
 		</div>
 

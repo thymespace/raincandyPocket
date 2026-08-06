@@ -1,6 +1,6 @@
 :root{
-	--windowScale: 0.25;
-	--pixMult: calc(var(--windowScale) * 0.5vw + var(--windowScale) * 0.5vh)
+	--windowScale: 0.125;
+	--pixMult: calc(var(--windowScale) * 0.25vw + var(--windowScale) * 0.75vh)
 }
 
 body{
@@ -8,6 +8,8 @@ body{
 	height: 100vh;
 	overflow: hidden;
 	margin: 0px;
+
+	background-color: red;
 }
 
 img.sharp {
@@ -35,10 +37,20 @@ div.window {
 	width: 100vw;
 	height: 100vh;
 
-	background-color: cyan;
-
 }
 
 div.windowSlice {
 	display: flex;
+}
+
+img.ame {
+
+	/* IE, only works on <img> tags */
+	-ms-interpolation-mode: nearest-neighbor;
+	/* Chromium + Safari */
+	image-rendering: pixelated;
+	/* Firefox */
+	image-rendering: crisp-edges;
+
+
 }
