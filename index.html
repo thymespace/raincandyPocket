@@ -11,7 +11,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 
 	<title>raincandy Pocket</title>
-	<link rel="icon" type="image/x-icon" href="assets/ame/Ame256.png">
+	<link rel="icon" type="image/x-icon" href="assets/ui/Ame256.png">
 
 	<link rel='stylesheet' href='main.css'>
 	<script src="ame.js"></script>
@@ -26,7 +26,27 @@
 
 		<div class="windowSlice">
 			<img class="sharp" src="assets/ui/window/0.png" style="height: calc(42 * var(--pixMult)); width: calc(8 * var(--pixMult));">
-			<img class="sharp" src="assets/ui/window/1.png" style="height: calc(42 * var(--pixMult)); width: calc(100vw - 16 * var(--pixMult));">
+			<div style="
+				height: calc(42 * var(--pixMult)); 
+				width: calc(100vw - 16 * var(--pixMult));
+			">
+
+				<img class="sharp" src="assets/ui/window/1.png" style="
+					z-index: -2; 
+					position: absolute; 
+					height: calc(42 * var(--pixMult)); 
+					width: calc(100vw - 16 * var(--pixMult));
+					">
+
+				<p style="
+					position: absolute; 
+					font-size: calc(16 * var(--pixMult)); 
+					padding-left: calc(8 * var(--pixMult));
+					top: calc(-4 * var(--pixMult));
+				">raincandy Pocket</p>
+
+			</div>
+
 			<img class="sharp" src="assets/ui/window/2.png" style="height: calc(42 * var(--pixMult)); width: calc(8 * var(--pixMult));">
 		</div>
 
@@ -35,8 +55,8 @@
 
 
 			<div style="height: calc(100vh - 60 * var(--pixMult)); width: calc(100vw - 16 * var(--pixMult)); overflow: hidden;">
-				<img class="sharp" id="background" src="assets/backgrounds/Bg_stream_1.png" style="height: 100%; width: 100%; object-fit: cover; z-index: -1; position: absolute;">
-				<img class="sharp" id="ame" src="assets/ame/idle/Ame_idle_S0-A0-D0.gif" style="height: 100%; width: 100%; object-fit: cover; z-index: -2;">
+				<img class="sharp" id="background" 	src="assets/backgrounds/Bg_stream_1.png" style="height: 100%; width: 100%; object-fit: cover; z-index: -50; position: absolute;">
+				<img class="sharp" id="ame" 		src="" onclick="AmeClicked()" style="height: 100%; width: 100%; object-fit: cover; z-index: -100;">
 			</div>
 
 			<img class="sharp" src="assets/ui/window/3.png" style="height: calc(100vh - 60 * var(--pixMult)); width: calc(8 * var(--pixMult));">

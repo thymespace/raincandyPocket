@@ -1,5 +1,10 @@
+@font-face {
+	font-family: "dinkiebitmap";
+	src: url(assets/DinkieBitmap9px.woff);
+}
+
 :root{
-	--windowScale: 0.125;
+	--windowScale: 0.25;
 	--pixMult: calc(var(--windowScale) * 0.25vw + var(--windowScale) * 0.75vh)
 }
 
@@ -9,7 +14,7 @@ body{
 	overflow: hidden;
 	margin: 0px;
 
-	background-color: red;
+	font-family: dinkiebitmap;
 }
 
 img.sharp {
