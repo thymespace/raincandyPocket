@@ -112,7 +112,7 @@ function main(){
 	if((Date.now() - lastCheck) < eventInterval) return;
 	lastCheck = Date.now();
 
-	let pseudorandomSeed = Date.now() % eventInterval;
+	let pseudorandomSeed = Math.floor(Date.now() / eventInterval);
 	currentEvent = Pseudorand(pseudorandomSeed, eventCount);
 	currentSpritesetPath = assetPathAme + assetPathsEvent[currentEvent];
 
