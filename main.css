@@ -66,6 +66,7 @@ img.ame {
 div.mainContentDiv{
 	height: calc(100vh - 60 * var(--pixMult)); 
 	width: calc(100vw - 16 * var(--pixMult)); 
+	position: relative;
 	overflow: hidden; 
 	z-index: -1000;
 }
@@ -82,11 +83,11 @@ div.windoseWindow{
 
 @keyframes odekakeGroundAni {
 	from{
-		background-position: 0%;
+		background-position: 0% 0%;
 	}
 
 	to{
-		background-position: 100%;
+		background-position: 100% 0%;
 	}
 }
 
