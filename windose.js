@@ -3,7 +3,7 @@
 
 // pseudorandom number generator
 function Pseudorand(seed){
-	let a = 676493; // a and c NEED to be PRIME
+	let a = 167; // a and c NEED to be PRIME
 	let c = 251;
 
 	return (a * seed + c);
@@ -32,8 +32,8 @@ function GetCurrentEventModifier(){
 	return lastPseudorandomNumber;
 }
 
-const eventInterval = 756227; // 12 and a bit minutes, prime number
-//const eventInterval = 1000; // for testing
+//const eventInterval = 756227; // 12 and a bit minutes, prime number
+const eventInterval = 1000; // for testing
 
 
 
@@ -43,6 +43,12 @@ const EventWindowTitles = [
 	"tweeter"	,
 	"metube"	,
 	"train"		,
+];
+
+const GameAnimationPaths = [
+	"assets/games/rabbitandsteel.gif",
+	"assets/games/deadlock.gif",
+	"assets/games/bombrush.gif"
 ];
 
 let eventWindows = [];
@@ -80,7 +86,7 @@ function main(){
 	if((Date.now() - lastCheck) < eventInterval) return;
 	lastCheck = Date.now();
 
-	currentEvent = GetCurrentEvent();
+	currentEvent = GetCurrentEvent(); currentEvent = AmeEvent.GAME;
 	windowTitle.innerText = EventWindowTitles[currentEvent];
 
 	// show correct window
@@ -160,6 +166,13 @@ function main(){
 			}
 
 
+			break;
+
+		case AmeEvent.GAME:
+
+			let gameIndex = GetCurrentEventModifier();
+			console.log(gameIndex)
+			background.src = GameAnimationPaths[gameIndex  % GameAnimationPaths.length];
 			break;
 
 		default:

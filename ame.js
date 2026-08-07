@@ -3,7 +3,7 @@
 
 // pseudorandom number generator
 function Pseudorand(seed){
-	let a = 676493; // a and c NEED to be PRIME
+	let a = 167; // a and c NEED to be PRIME
 	let c = 251;
 
 	return (a * seed + c);
