@@ -1,3 +1,10 @@
+// pseudorandom number generator
+function Pseudorand(seed, max){
+	let a = 676493; // a and c NEED to be PRIME
+	let c = 251;
+
+	return (a * seed + c) % max;
+}
 
 // asset path stuff
 const assetPathAme 		= "assets/ame/";
@@ -39,6 +46,14 @@ const ame_stress_spritesets = [
 	ame_stress1_sprites
 ];
 
+const eventCount = 4;
+const AmeEvent = Object.freeze({
+	STRESS 	: 0,
+	GAME 	: 1,
+	PHONE	: 2,
+	VIDEO	: 3
+});
+
 const assetPathsEvent	= [ // make sure this lines up with AmeEvent
 	"idle/"	,
 	"game/"	,
@@ -59,6 +74,7 @@ const audio_click = new Audio("assets/audio/pop_tooltip.wav");
 
 // event timing
 let lastCheck = 0;
+const eventInterval = 756227; // 12 and a bit minutes, prime number
 const affectionChance = 10;
 
 let petTimestamp = 0;
@@ -97,14 +113,13 @@ function main(){
 	lastCheck = Date.now();
 
 	let pseudorandomSeed = Math.floor(Date.now() / eventInterval);
-	currentEvent = GetCurrentEvent();
+	currentEvent = Pseudorand(pseudorandomSeed, eventCount);
 	currentSpritesetPath = assetPathAme + assetPathsEvent[currentEvent];
 
 	switch(currentEvent){
 		case AmeEvent.STRESS:
-			stress = GetCurrentEventModifier() % 2;
+			stress = Pseudorand(Pseudorand(pseudorandomSeed, 235514), 2);
 			currentSpriteset = ame_stress_spritesets[stress];
-			console.log(stress);
 			break;
 
 		default:
