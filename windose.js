@@ -54,9 +54,7 @@ const GameAnimationPaths = [
 const VideoAnimationPaths = [
 	"assets/videos/helpmemaketoys.gif",
 	"assets/videos/cat.gif",
-	"assets/videos/limb.gif",
 	"assets/videos/room67.gif",
-	"assets/videos/requiem.gif",
 	"assets/videos/yuyu.gif",
 ];
 
