@@ -1,10 +1,51 @@
+// event generation code - sync with other files.
+// YES i KNOW i should externalise this to a common file but i can't figure out how to get it to link on the web host i'm using
+
 // pseudorandom number generator
-function Pseudorand(seed, max){
+function Pseudorand(seed){
 	let a = 676493; // a and c NEED to be PRIME
 	let c = 251;
 
-	return (a * seed + c) % max;
+	return (a * seed + c);
 }
+
+
+const eventCount = 5;
+const AmeEvent = Object.freeze({
+	STRESS 	: 0,
+	GAME 	: 1,
+	PHONE	: 2,
+	VIDEO	: 3,
+	GOOUT	: 4,
+});
+
+let lastPseudorandomNumber = 0;
+
+function GetCurrentEvent(){
+	lastPseudorandomNumber = Math.floor(Date.now() / eventInterval);
+	lastPseudorandomNumber = Pseudorand(lastPseudorandomNumber);
+	return lastPseudorandomNumber % eventCount;
+}
+
+function GetCurrentEventModifier(){
+	lastPseudorandomNumber = Pseudorand(lastPseudorandomNumber);
+	return lastPseudorandomNumber;
+}
+
+const eventInterval = 756227; // 12 and a bit minutes, prime number
+//const eventInterval = 1000; // for testing
+
+
+
+
+
+
+
+
+
+
+
+
 
 // asset path stuff
 const assetPathAme 		= "assets/ame/";
@@ -46,19 +87,12 @@ const ame_stress_spritesets = [
 	ame_stress1_sprites
 ];
 
-const eventCount = 4;
-const AmeEvent = Object.freeze({
-	STRESS 	: 0,
-	GAME 	: 1,
-	PHONE	: 2,
-	VIDEO	: 3
-});
-
 const assetPathsEvent	= [ // make sure this lines up with AmeEvent
 	"idle/"	,
 	"game/"	,
 	"phone/",
 	"video/",
+	"idle/"	, // this is for go out, which shouldn't display anything. it's a fallback.
 ];
 
 const ame_event_spritesets = [ // make sure this lines up with AmeEvent
@@ -66,15 +100,14 @@ const ame_event_spritesets = [ // make sure this lines up with AmeEvent
 	ame_game_sprites	,
 	ame_phone_sprites	,
 	ame_video_sprites	,
+	ame_stress0_sprites	, // this is for go out, which shouldn't display anything. it's a fallback.
 ];
 
 
 const audio_click = new Audio("assets/audio/pop_tooltip.wav");
 
 
-// event timing
 let lastCheck = 0;
-const eventInterval = 756227; // 12 and a bit minutes, prime number
 const affectionChance = 10;
 
 let petTimestamp = 0;
@@ -89,14 +122,23 @@ let affection = 0;
 let currentSpriteset = [];
 let currentSpritesetPath = "";
 
+const EventWindowTitles = [
+	"webcam",
+	"playing a game",
+	"browsing tweeter",
+	"watching metube",
+	"went out..."
+];
+
 // wait for stuff to load
 window.addEventListener('load', function () {
 	// grab references
 	const ame 			= document.getElementById("ame");
+	const windowTitle	= document.getElementById("windowTitle");
 	const background 	= document.getElementById("background");
 
 	// call main
-	setInterval(main, 100)
+	setInterval(main, 500)
 })
 
 
@@ -112,20 +154,38 @@ function main(){
 	if((Date.now() - lastCheck) < eventInterval) return;
 	lastCheck = Date.now();
 
-	let pseudorandomSeed = Math.floor(Date.now() / eventInterval);
-	currentEvent = Pseudorand(pseudorandomSeed, eventCount);
+	currentEvent = GetCurrentEvent();
 	currentSpritesetPath = assetPathAme + assetPathsEvent[currentEvent];
 
+	// ame spriteset switch
+	ame.style.visibility = "visible";
 	switch(currentEvent){
 		case AmeEvent.STRESS:
-			stress = Pseudorand(Pseudorand(pseudorandomSeed, 235514), 2);
+			stress = GetCurrentEventModifier() % 2;
 			currentSpriteset = ame_stress_spritesets[stress];
+			break;
+
+		case AmeEvent.GOOUT:
+			ame.style.visibility = "hidden";
+			currentSpriteset = ame_event_spritesets[currentEvent];
 			break;
 
 		default:
 			currentSpriteset = ame_event_spritesets[currentEvent];
 			break;
 
+	}
+
+	// background switch
+	switch(currentEvent){
+		case AmeEvent.VIDEO:
+		case AmeEvent.GOOUT:
+			background.style.opacity = 0.5;
+			break;
+
+		default:
+			background.style.opacity = 1.0;
+			break;
 	}
 	
 	// reset affection
