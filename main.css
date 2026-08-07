@@ -68,7 +68,6 @@ div.mainContentDiv{
 	width: calc(100vw - 16 * var(--pixMult)); 
 	position: relative;
 	overflow: hidden; 
-	z-index: -1000;
 }
 
 div.windoseWindow{
