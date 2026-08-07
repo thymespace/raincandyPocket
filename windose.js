@@ -32,8 +32,8 @@ function GetCurrentEventModifier(){
 	return lastPseudorandomNumber;
 }
 
-//const eventInterval = 756227; // 12 and a bit minutes, prime number
-const eventInterval = 1000; // for testing
+const eventInterval = 756227; // 12 and a bit minutes, prime number
+//const eventInterval = 1000; // for testing
 
 
 
@@ -86,7 +86,7 @@ function main(){
 	if((Date.now() - lastCheck) < eventInterval) return;
 	lastCheck = Date.now();
 
-	currentEvent = GetCurrentEvent(); currentEvent = AmeEvent.GAME;
+	currentEvent = GetCurrentEvent();
 	windowTitle.innerText = EventWindowTitles[currentEvent];
 
 	// show correct window
