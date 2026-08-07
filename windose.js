@@ -51,6 +51,13 @@ const GameAnimationPaths = [
 	"assets/games/bombrush.gif"
 ];
 
+const VideoAnimationPaths = [
+	"assets/videos/helpmemaketoys.gif",
+	"assets/videos/cat.gif",
+	"assets/videos/limb.gif",
+	"assets/videos/room67.gif"
+];
+
 let eventWindows = [];
 
 
@@ -169,10 +176,11 @@ function main(){
 			break;
 
 		case AmeEvent.GAME:
+			background.src = GameAnimationPaths[GetCurrentEventModifier()  % GameAnimationPaths.length];
+			break;
 
-			let gameIndex = GetCurrentEventModifier();
-			console.log(gameIndex)
-			background.src = GameAnimationPaths[gameIndex  % GameAnimationPaths.length];
+		case AmeEvent.VIDEO:
+			background.src = VideoAnimationPaths[GetCurrentEventModifier()  % VideoAnimationPaths.length];
 			break;
 
 		default:
