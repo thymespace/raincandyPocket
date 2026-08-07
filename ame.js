@@ -1,23 +1,13 @@
 // pseudorandom number generator
 function Pseudorand(seed, max){
-	let a = 2142423;
-	let c = 12345;
+	let a = 676493; // a and c NEED to be PRIME
+	let c = 251;
 
 	return (a * seed + c) % max;
 }
 
-const eventCount = 3;
-const AmeEvent = Object.freeze({
-	STRESS 	: 0,
-	GAME 	: 1,
-	PHONE	: 2
-});
-
 // asset path stuff
 const assetPathAme 		= "assets/ame/";
-const assetPathIdle		= "idle/";
-const assetPathGame 	= "game/";
-const assetPathPhone 	= "phone/";
 
 // i know i shouldn't be hardcoding these but i'm LAZY
 const ame_stress0_sprites = [
@@ -44,10 +34,38 @@ const ame_phone_sprites = [
 	"Ame_phone_S0-A2-D0.gif"
 ];
 
+const ame_video_sprites = [
+	"Ame_video_S0-A0-D0.gif",
+	"Ame_video_S0-A1-D0.gif",
+	"Ame_video_S0-A2-D0.gif"
+];
+
 
 const ame_stress_spritesets = [
 	ame_stress0_sprites,
 	ame_stress1_sprites
+];
+
+const eventCount = 4;
+const AmeEvent = Object.freeze({
+	STRESS 	: 0,
+	GAME 	: 1,
+	PHONE	: 2,
+	VIDEO	: 3
+});
+
+const assetPathsEvent	= [ // make sure this lines up with AmeEvent
+	"idle/"	,
+	"game/"	,
+	"phone/",
+	"video/",
+];
+
+const ame_event_spritesets = [ // make sure this lines up with AmeEvent
+	ame_stress0_sprites	, // this shouldn't be used, but it's here in case of failure
+	ame_game_sprites	,
+	ame_phone_sprites	,
+	ame_video_sprites	,
 ];
 
 
@@ -56,7 +74,7 @@ const audio_click = new Audio("assets/audio/pop_tooltip.wav");
 
 // event timing
 let lastCheck = 0;
-const eventInterval = 1140230; // 17 and a bit minutes
+const eventInterval = 756227; // 12 and a bit minutes, prime number
 const affectionChance = 10;
 
 let petTimestamp = 0;
@@ -96,22 +114,16 @@ function main(){
 
 	let pseudorandomSeed = Date.now() % eventInterval;
 	currentEvent = Pseudorand(pseudorandomSeed, eventCount);
+	currentSpritesetPath = assetPathAme + assetPathsEvent[currentEvent];
 
 	switch(currentEvent){
 		case AmeEvent.STRESS:
 			stress = Pseudorand(Pseudorand(pseudorandomSeed, 235514), 2);
-			currentSpritesetPath = assetPathAme + assetPathIdle;
 			currentSpriteset = ame_stress_spritesets[stress];
 			break;
 
-		case AmeEvent.GAME:
-			currentSpritesetPath = assetPathAme + assetPathGame;
-			currentSpriteset = ame_game_sprites;
-			break;
-
-		case AmeEvent.PHONE:
-			currentSpritesetPath = assetPathAme + assetPathPhone;
-			currentSpriteset = ame_phone_sprites;
+		default:
+			currentSpriteset = ame_event_spritesets[currentEvent];
 			break;
 
 	}
