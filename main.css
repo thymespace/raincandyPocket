@@ -15,7 +15,8 @@ body{
 	margin: 0px;
 
 	font-family: dinkiebitmap;
-	background-color: black;
+	background-color: white;
+	color: #4d23cf;
 }
 
 img.sharp {
@@ -47,6 +48,7 @@ div.window {
 
 div.windowSlice {
 	display: flex;
+	position: static;
 }
 
 img.ame {
@@ -59,4 +61,75 @@ img.ame {
 	image-rendering: crisp-edges;
 
 
+}
+
+div.mainContentDiv{
+	height: calc(100vh - 60 * var(--pixMult)); 
+	width: calc(100vw - 16 * var(--pixMult)); 
+	overflow: hidden; 
+	z-index: -1000;
+}
+
+div.windoseWindow{
+	height: calc(100vh - 60 * var(--pixMult)); 
+	width: calc(100vw - 16 * var(--pixMult)); 
+	position: absolute; 
+}
+
+
+
+/*odekake stuff*/
+
+@keyframes odekakeGroundAni {
+	from{
+		background-position: 0%;
+	}
+
+	to{
+		background-position: 100%;
+	}
+}
+
+@keyframes odekakeScrollAni {
+	from{
+		left: -100%;
+	}
+	to{
+		left: 200%;
+	}
+	
+}
+
+div.odekakeGround{
+	background-image: url(assets/odekake/odekake_ground.png);
+	width: 200vw;
+	height: 11.8518518519vw;
+	background-repeat: repeat-x;
+	background-size: contain;
+	
+	z-index: -10;
+	position: absolute;
+	bottom: 0px;
+
+	animation-name: odekakeGroundAni;
+	animation-duration: 2.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+img.odekakeBackgroundElement{
+	position: absolute;
+	bottom: 11.8518518519vw;
+	animation-name: odekakeScrollAni;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	image-rendering: optimizeQuality; /*blurs the pixel art, which we use to emulate depth of field*/
+}
+
+img.odekakeForegroundElement{
+	position: absolute;
+	bottom: 0;
+	animation-name: odekakeScrollAni;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }

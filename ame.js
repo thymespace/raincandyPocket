@@ -155,6 +155,7 @@ function main(){
 	lastCheck = Date.now();
 
 	currentEvent = GetCurrentEvent();
+	windowTitle.innerText = EventWindowTitles[currentEvent];
 	currentSpritesetPath = assetPathAme + assetPathsEvent[currentEvent];
 
 	// ame spriteset switch
